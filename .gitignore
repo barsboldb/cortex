@@ -1,0 +1,55 @@
+# Compiled object files
+*.o
+*.obj
+
+# Compiled executables
+*.exe
+*.out
+a.out
+
+# Libraries
+*.a
+*.so
+*.dylib
+*.dll
+
+# Build directories
+build/
+bin/
+lib/
+
+# Test executables
+tests/test_*
+!tests/test_*.c
+!tests/test_*.h
+
+# Example executables
+examples/xor
+examples/mnist
+
+# Model files (trained networks)
+*.model
+*.weights
+
+# Data files
+*.idx
+*.ubyte
+data/
+
+# Editor/IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Core dumps
+core
+vgcore.*
