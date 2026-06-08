@@ -92,3 +92,8 @@ cortex/
 - **Extensibility**: Function pointers for activations/optimizers
 - **GPU-ready**: Structure designed for future GPU/Neural Engine acceleration
 - **Simple dependencies**: Pure C with standard library only
+
+## Future Optimizations
+
+### Buffer-Reuse Allocator
+During training, tensors (caches, intermediate outputs) are allocated and freed repeatedly with the same shapes. A memory pool could intercept `tensor_create`/`tensor_free` calls and reuse buffers instead of hitting `malloc`/`free` every step. Buffers would be bucketed by size and held for a TTL before actually freeing. This would reduce allocation overhead significantly for large or input-intensive models. Implement after the framework is fully working and profiled.
