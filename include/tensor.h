@@ -24,6 +24,10 @@ void tensor_add(Tensor *a, Tensor *b);
 void tensor_scale(Tensor *a, float s);
 void tensor_sum_rows(Tensor *a, Tensor *out);
 void tensor_add_bias(Tensor *a, const Tensor *bias);
+void tensor_scaled_add(Tensor *a, Tensor *b, float s);
+void tensor_hadamard(Tensor *a, Tensor *b);
+
+void tensor_zero(Tensor *t);
 
 void tensor_print(const Tensor *t, const char *label);
 

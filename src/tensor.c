@@ -25,6 +25,8 @@ Tensor *tensor_copy(const Tensor *t) {
 }
 
 void tensor_free(Tensor *t) {
+  if (!t) return;
+
   free(t->data);
   free(t);
 }
@@ -110,6 +112,17 @@ void tensor_add(Tensor *a, Tensor *b) {
   }
 }
 
+void tensor_scaled_add(Tensor *a, Tensor *b, float s) {
+  assert(a->rows == b->rows);
+  assert(a->cols == b->cols);
+
+  for (int i = 0; i < a->rows; i++) {
+    for (int j = 0; j < a->cols; j++) {
+      tensor_at(a, i, j) += tensor_at(b, i, j) * s;
+    }
+  }
+}
+
 void tensor_scale(Tensor *a, float s) {
   for (int i = 0; i < a->rows; i++) {
     for (int j = 0; j < a->cols; j++) {
@@ -128,6 +141,17 @@ void tensor_sum_rows(Tensor *a, Tensor *out) {
   }
 }
 
+void tensor_hadamard(Tensor *a, Tensor *b) {
+  assert(a->rows == b->rows);
+  assert(a->cols == b->cols);
+
+  for (int i = 0; i < a->rows; i++) {
+    for (int j = 0; j < a->cols; j++) {
+      tensor_at(a, i, j) *= tensor_at(b, i, j);
+    }
+  }
+}
+
 void tensor_print(const Tensor *t, const char *label) {
   printf("%s [%d x %d]\n", label, t->rows, t->cols);
   for (int i = 0; i < t->rows; i++) {
@@ -136,5 +160,12 @@ void tensor_print(const Tensor *t, const char *label) {
     }
     printf("\n");
   }
+}
+
+
+void tensor_zero(Tensor *t) {
+  if (!t) return;
+
+  memset(t->data, 0, t->rows * t->cols * sizeof(float));
 }
 
